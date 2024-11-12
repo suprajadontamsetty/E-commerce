@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react"
 import { ShopContext } from "../context/shopcontext"
 import Productitem from "./productitem";
+import Title from "./title";
+
 
 
 
@@ -21,8 +23,6 @@ const Relatedproducts = ({category,subCategory}) => {
                 return category === item.category
             });
 
-            
-            console.log(category, subCategory)
 
             productsCopy = productsCopy.filter((item)=> subCategory === item.subCategory);
 
@@ -35,6 +35,7 @@ const Relatedproducts = ({category,subCategory}) => {
   return (
     <div className="my-24">
         <div className="text-center text-3xl py-2">
+            <Title text1={'RELATED'} text2 ={'PRODUCTS'}/>
             
 
         </div>
