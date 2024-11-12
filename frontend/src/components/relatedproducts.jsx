@@ -6,7 +6,7 @@ import Productitem from "./productitem";
 
 
 
-const Relatedproducts = (category,subCategory) => {
+const Relatedproducts = ({category,subCategory}) => {
 
     const {products} =  useContext(ShopContext)
     const [related,setRelated] = useState([]);
@@ -16,7 +16,10 @@ const Relatedproducts = (category,subCategory) => {
         if(products.length >0 ) {
             let productsCopy = products.slice();
 
-            productsCopy =  productsCopy.filter((item)=>category === item.category);
+            productsCopy =  productsCopy.filter((item)=>{
+                // console.log(category, " => " ,item.category);
+                return category === item.category
+            });
 
             
             console.log(category, subCategory)
