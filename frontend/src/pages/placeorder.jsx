@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState,useContext } from "react"
 import { assets } from "../assets/assets"
 import CartTotal from "../components/carttotal"
 import Title from "../components/title"
@@ -10,7 +10,7 @@ import { ShopContext } from "../context/shopcontext"
 const Placeorder = () => {
 
   const [method, setMethod] = useState('cod');
-  const {navigate} = useState(ShopContext)
+  const {navigate} = useContext(ShopContext)
  
   return (
     <div className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t">
