@@ -4,7 +4,7 @@ import CartTotal from "../components/carttotal"
 import Title from "../components/title"
 import { ShopContext } from "../context/shopcontext"
 import axios from "axios"
-import toast from "react-toastify"
+import {toast} from "react-toastify"
 
 
 
