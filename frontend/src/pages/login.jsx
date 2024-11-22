@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useState } from "react"
 import { ShopContext } from "../context/shopcontext";
 import axios from 'axios';
-import toast from 'react-toastify';
+import {toast} from 'react-toastify';
 import { useEffect } from "react";
 
 const Login = () => {

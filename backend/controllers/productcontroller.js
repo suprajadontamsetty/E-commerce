@@ -1,5 +1,5 @@
-import {v2 as cloudinary } from "cloudinary"
-import productModel from "../models/productModel"
+import { v2 as cloudinary } from "cloudinary"
+import productModel from "../models/productModel.js"
 
 //functi0on for add product
 const addProduct = async (req,res) => {
@@ -29,7 +29,7 @@ const addProduct = async (req,res) => {
     price: Number (price),
     subCategory,
     bestSeller: bestSeller === 'true'? true : false,
-    sizes:JSON.parse(sizes)
+    sizes:JSON.parse(sizes),
     image:imagesUrl,
     date:Date.now()
    }
