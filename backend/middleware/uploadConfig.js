@@ -10,6 +10,16 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname)); // generate a unique filename
   }
 });
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+  if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+  } else {
+      cb(new Error('Only images are allowed'), false);
+  }
+};
 
-// Initialize multer with the storage configuration
-export const upload = multer({ storage: storage });  // Named export
+export const upload = multer({ 
+  storage: storage,
+  fileFilter: fileFilter 
+});

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { backendUrl, currency } from "../App"
+import { currency } from "../App"
 import {toast} from 'react-toastify'
 
 
@@ -10,7 +10,7 @@ const List = ({token}) => {
 
     const  fetchList = async () => {
         try{
-            const response = await axios.get(backendUrl + '/api/product/list')
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/list`)
             if (response.data.success) {
                 setList(response.data.products);
             }
@@ -21,7 +21,7 @@ const List = ({token}) => {
            
 
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             toast.error(error.message)
 
         }
@@ -31,7 +31,7 @@ const List = ({token}) => {
     const removeProduct =  async (id) => {
          try {
             
-            const response = await axios.post(backendUrl + '/api/product/remove', {id}, {headers:{token}})
+            const response = await axios.post(import.meta.env.VITE_BACKEND_URL + '/api/product/remove', {id}, {headers:{token}})
             if (response.data.success) {
                 toast.success(response.data.message)
                 await fetchList();

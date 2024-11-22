@@ -24,7 +24,7 @@ const Add = ({ token }) => {
 
     try {
       const formData = new FormData();
-      alert(backendUrl + "/api/product/add");
+      // alert(backendUrl + "/api/product/add");
       formData.append("name", name);
       formData.append("description", description);
       formData.append("price", price);
@@ -38,13 +38,13 @@ const Add = ({ token }) => {
       image3 && formData.append("image3", image3);
       image4 && formData.append("image4", image4);
 
-      alert("http://localhost:4000/api/product/add");
+      // alert("http://localhost:4000/api/product/add");
       const response = await axios.post(
         "http://localhost:4000/api/product/add",
         formData,
         { headers: { token } }
       );
-      alert(backendUrl + "/api/product/add");
+      // alert(backendUrl + "/api/product/add");
 
       if (response.data.sucsess) {
         toast.success(response.data.message);

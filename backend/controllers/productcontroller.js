@@ -14,12 +14,18 @@ const addProduct = async (req,res) => {
 
     const images = [image1,image2,image3,image4].filter((item)=> item  !==undefined)
 
-    let imagesUrl = await Promise.all(
-        images.map(async(item)=>{
-            let result = await cloudinary.uploader.upload(item.path,{resource_type:'image'});
-            return result.secure_url
+    const imagesUrl = await Promise.all(
+        images.map(async (item) => {
+            try {
+                let result = await cloudinary.uploader.upload(item.path, { resource_type: 'image' });
+                return result.secure_url;
+            } catch (error) {
+                console.error(`Failed to upload ${item.filename}:`, error.message);
+                throw new Error('Image upload failed');
+            }
         })
-    )
+    );
+    
 
    const productData = {
     name,

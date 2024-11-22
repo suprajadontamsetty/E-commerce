@@ -12,7 +12,7 @@ import { useEffect } from "react";
 
     const currency = '$';
     const delivery_fee = 10;
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const backendUrl = "http://localhost:4000"
     const [search,setSearch] = useState('');
     const [showSearch, setShowSearch] =  useState(false)
     const [cartItems, setCartItems] = useState({});
@@ -48,7 +48,6 @@ import { useEffect } from "react";
         if (token) {
 
             try {
-
                 await axios.post(backendUrl+'/api/cart/add',{itemId, size},{headers:{token}})
                 
             } catch (error) {
@@ -123,6 +122,7 @@ import { useEffect } from "react";
      const getProductsData = async () =>{
 
         try {
+            alert(backendUrl);
 
             const response = await axios.get(backendUrl + '/api/product/list')
             if(response.data.success) {
