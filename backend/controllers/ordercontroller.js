@@ -1,5 +1,5 @@
-import orderModel from "../models/ordermodel.js";
-import userModel from "../models/usermodel.js";
+import ordermodel from "../models/ordermodel.js";
+import usermodel from "../models/usermodel.js";
 import Stripe from 'stripe'
 // import razorpay from 'razorpay'
 
@@ -33,10 +33,10 @@ const placeOrder = async (req,res) => {
             date: Date.now()
         }
 
-        const newOrder = new orderModel(orderData)
+        const newOrder = new ordermodel(orderData)
         await newOrder.save()
 
-        await userModel.findByIdAndUpdate(userId,{cartData:{}})
+        await usermodel.findByIdAndUpdate(userId,{cartData:{}})
 
         res.json({success:true, message:"Order Placed"})
 
@@ -68,7 +68,7 @@ const placeOrderStripe = async (req,res) => {
         date: Date.now()
     }
 
-    const newOrder = new orderModel(orderData)
+    const newOrder = new ordermodel(orderData)
     await newOrder.save()
 
     const line_items = items.map((item)=>({
@@ -122,12 +122,12 @@ const verifyStripe = async(req,res)=>{
     try {
         if (success === "true") {
 
-            await orderModel.findByIdAndUpdate(orderId,{payment:true});
-            await userModel.findByIdAndUpdate(userId, {cartData:{}})
+            await ordermodel.findByIdAndUpdate(orderId,{payment:true});
+            await usermodel.findByIdAndUpdate(userId, {cartData:{}})
             res.json({success: true});
             
         }else{
-            await orderModel.findbyIdAndDelete(orderId)
+            await ordermodel.findbyIdAndDelete(orderId)
             res.json({success:false})
         }
     } catch (error) {
@@ -157,7 +157,7 @@ const verifyStripe = async(req,res)=>{
 //        date: Date.now()
 //    }
 
-//    const newOrder = new orderModel(orderData)
+//    const newOrder = new ordermodel(orderData)
 //    await newOrder.save()
 
 //    const options = {
@@ -192,8 +192,8 @@ const verifyStripe = async(req,res)=>{
 
 //     const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id)
 //     if (orderInfo.status ==='paid') {
-//         await orderModel.finallyIdAndUpdate(orderInfo.receipt, {payment:true});
-//         await userModel.findByIdAndUpdate(userId,{cartData:{}})
+//         await ordermodel.findByIdAndUpdate(orderInfo.receipt, {payment:true});
+//         await usermodel.findByIdAndUpdate(userId,{cartData:{}})
 //         res.json({success: true, message:"Payment Successful" })
 //     }else{
 //    res.json({success:false, message:'Payment failed'})
@@ -211,7 +211,7 @@ const allOrders = async(req,res) => {
 
     try {
 
-        const orders = await orderModel.find({})
+        const orders = await ordermodel.find({})
         res.json({success:true,orders}) 
         
     } catch (error) {
@@ -228,7 +228,7 @@ const userOrders = async(req,res) => {
 
     try {
        const {userId} = req.body
-       const orders = await orderModel.find({userId})
+       const orders = await ordermodel.find({userId})
 
        res.json({success:true,orders})
         
@@ -247,7 +247,7 @@ const updateStatus = async(req,res) => {
   try {
     const {orderId, status} = req.body
 
-    await orderModel.finallyIdAndUpdate(orderId, {status})
+    await ordermodel.findByIdAndUpdate(orderId, {status})
     res.json({success:true,message:"Status Updated"})
   } catch (error) {
     console.log(error)
@@ -255,5 +255,5 @@ const updateStatus = async(req,res) => {
   }
 }
 
-// export {verifyRazorpay,verifyStripe,placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus}
 export {verifyStripe,placeOrder, placeOrderStripe, allOrders, userOrders, updateStatus}
+// export {verifyRazorpay,verifyStripe,placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus}

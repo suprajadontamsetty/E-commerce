@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-// import cartRouter from '../routes/cartroute';
+import cartroute from '../routes/cartroute.js';
 
 const authUser = async (req, res, next) => {
 

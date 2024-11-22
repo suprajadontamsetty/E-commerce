@@ -3,7 +3,7 @@ import { ShopContext } from "../context/shopcontext"
 import {Link} from "react-router-dom"
 
 
-const Productitem = ({id,image,name,price}) => {
+const Productitem = ({id, image, name, price}) => {
 
     const {currency}=useContext(ShopContext);
   return (
@@ -16,7 +16,7 @@ const Productitem = ({id,image,name,price}) => {
     <p className="text-sm font-medium">{currency}{price}</p>
     
    </Link>
-  )
-}
+  );
+};
 
 export default Productitem
