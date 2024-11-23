@@ -90,30 +90,29 @@ const registerUser = async (req, res) => {
 
 //Route for adminLogin
 
-const adminLogin = async (req, res) => {
+const adminLogin = async (req,res) =>{
+
     try {
-        const { email, password } = req.body;
+        
+        const{email,password} = req.body
 
         console.log(email, password);
 
-        // Check if credentials match the environment variables
         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-            // Generate a JWT token with a proper payload
-            const token = jwt.sign(
-                { email }, // Payload (keep it minimal and secure)
-                process.env.JWT_SECRET, // Secret key
-                { expiresIn: '1d' } // Optional expiration time for security
-            );
 
-            res.json({ success: true, token });
-        } else {
-            res.json({ success: false, message: "Invalid Credentials" });
+            const token = jwt.sign(email+password,process.env.JWT_SECRET)
+            res.json({success:true,token})
+            
+        }else{
+            res.json({success:false, message:"Invalid Credentials"})
         }
     } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
-    }
-};
 
+        console.log(error);
+        res.json({success:false, message:error.message})
+        
+    }
+
+}
 
 export { loginUser, registerUser, adminLogin }
