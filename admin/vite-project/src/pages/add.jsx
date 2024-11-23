@@ -5,7 +5,7 @@ import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
 const Add = ({ token }) => {
-    // alert(JSON.stringify(token));
+  // alert(JSON.stringify(token));
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
@@ -38,9 +38,12 @@ const Add = ({ token }) => {
       image3 && formData.append("image3", image3);
       image4 && formData.append("image4", image4);
 
+      // console.log(bestseller);
+      // return;
+
       // alert("http://localhost:4000/api/product/add");
       const response = await axios.post(
-        "http://localhost:4000/api/product/add",
+        import.meta.env.VITE_BACKEND_URL+"/api/product/add",
         formData,
         { headers: { token } }
       );
@@ -201,9 +204,8 @@ const Add = ({ token }) => {
             }
           >
             <p
-              className={`${
-                sizes.includes("S") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
+              className={`${sizes.includes("S") ? "bg-pink-100" : "bg-slate-200"
+                } px-3 py-1 cursor-pointer`}
             >
               S
             </p>
@@ -218,9 +220,8 @@ const Add = ({ token }) => {
             }
           >
             <p
-              className={`${
-                sizes.includes("M") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
+              className={`${sizes.includes("M") ? "bg-pink-100" : "bg-slate-200"
+                } px-3 py-1 cursor-pointer`}
             >
               M
             </p>
@@ -235,9 +236,8 @@ const Add = ({ token }) => {
             }
           >
             <p
-              className={`${
-                sizes.includes("L") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
+              className={`${sizes.includes("L") ? "bg-pink-100" : "bg-slate-200"
+                } px-3 py-1 cursor-pointer`}
             >
               L
             </p>
@@ -252,9 +252,8 @@ const Add = ({ token }) => {
             }
           >
             <p
-              className={`${
-                sizes.includes("XL") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
+              className={`${sizes.includes("XL") ? "bg-pink-100" : "bg-slate-200"
+                } px-3 py-1 cursor-pointer`}
             >
               XL
             </p>
@@ -269,9 +268,8 @@ const Add = ({ token }) => {
             }
           >
             <p
-              className={`${
-                sizes.includes("XXL") ? "bg-pink-100" : "bg-slate-200"
-              } px-3 py-1 cursor-pointer`}
+              className={`${sizes.includes("XXL") ? "bg-pink-100" : "bg-slate-200"
+                } px-3 py-1 cursor-pointer`}
             >
               XXL
             </p>
@@ -280,7 +278,7 @@ const Add = ({ token }) => {
       </div>
       <div className="flex gap-2 mt-2">
         <input
-          onChange={() => setBestSeller((prev) => !prev)}
+          onChange={(e) => setBestSeller(e.target.checked)}
           checked={bestseller}
           type="checkbox"
           id="bestseller"
@@ -289,6 +287,7 @@ const Add = ({ token }) => {
           Add to Bestseller
         </label>
       </div>
+
 
       <button type="submit" className="w-28 py-3 mt-4 bg-black text-white">
         ADD
